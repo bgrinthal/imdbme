@@ -16,15 +16,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // used for password encryption, crypto
     salt: {
         type: String,
         required: true
     }
 }, modelOptions)
 
-userSchema.methods.setPassword = function(password) {
+// encrypts current "this" password
+userSchema.methods.setPassword = (password) => {
     this.salt = crypto.randomBytes(16).toString("hex")
 
+    //syntax crypto.pbkdf2Sync( password, salt, iterations, keylen, digest )
+    // for more info, see: https://www.geeksforgeeks.org/node-js-crypto-pbkdf2sync-method/#
     this.password = crypto.pbkdf2Sync(
         password,
         this.salt,
@@ -34,7 +38,8 @@ userSchema.methods.setPassword = function(password) {
     ).toString("hex");
 }
 
-userSchema.methods.validPassword = function(password) {
+// returns hashed password
+userSchema.methods.validPassword = (password) => {
     const hash = crypto.pbkdf2Sync(
         password,
         this.salt,
