@@ -42,12 +42,16 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
     try {
+        // saves to request body
         const { username, password } = req.body
 
+        // .select method selects which fields to be displayed in query result.  This will excluse the password
         const user = await userModel.findOne({ username }).select("username password salt id displayName")
 
+        // check if user exists
         if(!user) return responseHandler.badrequest(res, "User does not exist")
 
+        // checks if password is valid
         if(!user.validPassword(password)) return responseHandler.badrequest(res, "Incorrect Password")
 
         // creates a token that expires in a day
