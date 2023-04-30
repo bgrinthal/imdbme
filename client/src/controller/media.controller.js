@@ -3,7 +3,6 @@ import tmdbApi from "../tmbd/tmdb.api.js";
 import userModel from "../models/user.model.js";
 import favoriteModel from "../models/favorite.model.js";
 import reviewModel from "../models/review.model.js";
-import tokenDecoded from "../middlewares/token.middleware.js";
 import tokenMiddleware from "../middlewares/token.middleware.js";
 
 const getList = async (req, res) => {
