@@ -1,4 +1,4 @@
-import tmdbConfig from "./tmbd.config";
+import tmdbConfig from "./tmdb.config";
 
 //passes into getUrl = (endpoint, params) for each 
 const tmdbEndpoints = {
