@@ -1,12 +1,16 @@
 import mongoose, { Schema } from "mongoose";
-import modelOptions from "./model.options";
+import modelOptions from "./model.options.js";
 
 // export default mongoose.model(
-//     "Favorite",
+//     "Review",
 //     mongoose.Schema({
 //         user: {
 //             type: Schema.Types.ObjectId,
 //             ref: "user",
+//             required: true
+//         },
+//         content: {
+//             type: String,
 //             required: true
 //         },
 //         mediaTyper: {
@@ -26,20 +30,20 @@ import modelOptions from "./model.options";
 //             type: String,
 //             required: true
 //         },
-//         mediaRate: {
-//             type: Number,
-//             required: true
-//         },
 //     }, modelOptions)
-// )
+// );
 
-const favoriteSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
         user: {
             type: Schema.Types.ObjectId,
             ref: "user",
             required: true
         },
-        mediaType: {
+        content: {
+            type: String,
+            required: true
+        },
+        mediaTyper: {
             type: String,
             enum: ["tv", "movie"],
             required: true
@@ -56,12 +60,8 @@ const favoriteSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        mediaRate: {
-            type: Number,
-            required: true
-        },
     }, modelOptions);
 
-const favoriteModel = mongoose.model("Favorite", favoriteSchema);
+const reviewModel = mongoose.model("Review", reviewSchema);
 
-export default favoriteModel;
+export default reviewModel;
